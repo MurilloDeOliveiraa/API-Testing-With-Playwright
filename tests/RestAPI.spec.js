@@ -1,6 +1,8 @@
 import { expect, request, test } from "@playwright/test";
 
 test.describe('REST API SMOKE TESTS', () => {
+
+    //https://jsonplaceholder.typicode.com/
     let apiContext;
 
     test.beforeEach(async () => {
@@ -23,7 +25,6 @@ test.describe('REST API SMOKE TESTS', () => {
             }
         });
         let jsonResponse = await createPostResponse.json();
-        console.log(jsonResponse);
         await expect(createPostResponse.ok()).toBeTruthy();
         await expect(jsonResponse).not.toBeNull();
     });
@@ -31,7 +32,6 @@ test.describe('REST API SMOKE TESTS', () => {
     test('GET - Verify if a post exists', async () => {
         let getPostResponse = await apiContext.get('/posts/100');
         let jsonResponse = await getPostResponse.json();
-        console.log(jsonResponse);
         await expect(getPostResponse.ok()).toBeTruthy();
         await expect(jsonResponse).not.toBeNull();
     });
@@ -46,7 +46,6 @@ test.describe('REST API SMOKE TESTS', () => {
             }
         });
         let jsonResponse = await updatePostResponse.json();
-        console.log(jsonResponse);
         await expect(updatePostResponse.status()).toBe(200);
         await expect(jsonResponse).not.toBeNull();
     });
@@ -57,15 +56,12 @@ test.describe('REST API SMOKE TESTS', () => {
         let userId = jsonResponse.userId;
         await expect(userId).toBe(10);
         await expect(getPostResponse.ok()).toBeTruthy();
-        console.log(jsonResponse);
     });
 
     test('DELETE - Delete an existing post', async () => {
         let getPostResponse = await apiContext.delete('/posts/100');
         let textReponse = await getPostResponse.text();
         let jsonResponse = await getPostResponse.json();
-        console.log(textReponse);
-        console.log(jsonResponse);
         await expect(getPostResponse.ok()).toBeTruthy();
         await expect(textReponse).toBe('{}');
         await expect(jsonResponse).toMatchObject({});
