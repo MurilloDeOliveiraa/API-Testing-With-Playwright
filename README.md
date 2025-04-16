@@ -5,7 +5,7 @@
 
 ## Used Technologies
 - Git
-- GitHub Actions
+- GitHub Actions [Workflows](https://github.com/MurilloDeOliveiraa/API-Testing-With-Playwright/actions)
 - JavaScript
 - Playwright
 
